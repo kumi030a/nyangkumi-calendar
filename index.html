@@ -3,94 +3,165 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
+
 <style>
-*{box-sizing:border-box}
-html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#211a17}
+*{
+  box-sizing:border-box;
+}
+
+html,body{
+  margin:0;
+  width:100%;
+  height:100%;
+  overflow:hidden;
+  background:#211a17;
+}
+
+/* 움직이는 방 배경 */
 .room{
- position:relative;
- width:100vw;
- height:100vh;
- background:url("room.gif") center/contain no-repeat;
+  position:relative;
+  width:100vw;
+  height:100vh;
+
+  background-image:url("room.gif");
+  background-size:contain;
+  background-position:center;
+  background-repeat:no-repeat;
 }
 
-/* 클릭 전 벽걸이 달력 */
+
+/* =========================
+   클릭 전 달력
+========================= */
+
 .calbtn{
- position:absolute;
- left:67%;
- top:29%;
- width:12%;
- height:25%;
- cursor:pointer;
- border-radius:10px;
- background:#fff8f5;
- border:3px solid #fff;
- box-shadow:0 5px 15px #0004;
- overflow:hidden;
- text-align:center;
- text-decoration:none;
- color:#9d625b;
-}
-.month{
- display:block;
- background:#ed969d;
- color:white;
- padding:8% 0;
- font:bold 1.5vw Arial;
-}
-.date{
- display:block;
- padding:12% 0 4%;
- font:bold 3vw Georgia;
-}
-.label{
- display:block;
- font:bold 1vw Arial;
- color:#ad7470;
+  position:absolute;
+
+  /* 위치 */
+  left:57%;
+  top:37%;
+
+  /* 크기는 기존 그대로 */
+  width:12%;
+  height:25%;
+
+  cursor:pointer;
+  overflow:hidden;
+
+  border:3px solid #fff;
+  border-radius:10px;
+
+  background:#fff8f5;
+
+  box-shadow:0 5px 15px #0004;
+
+  text-align:center;
+  text-decoration:none;
+  color:#9d625b;
 }
 
-/* 캘린더 화면 */
+.month{
+  display:block;
+
+  padding:8% 0;
+
+  background:#ed969d;
+  color:white;
+
+  font:bold 1.5vw Arial;
+}
+
+.date{
+  display:block;
+
+  padding:12% 0 4%;
+
+  font:bold 3vw Georgia;
+}
+
+.label{
+  display:block;
+
+  color:#ad7470;
+
+  font:bold 1vw Arial;
+}
+
+
+/* =========================
+   달력 클릭 후 화면
+========================= */
+
 .panel{
- position:absolute;
- inset:0;
- background:rgba(25,15,12,.35);
- opacity:0;
- pointer-events:none;
- transition:.3s;
+  position:absolute;
+  inset:0;
+
+  background:rgba(25,15,12,.35);
+
+  opacity:0;
+  pointer-events:none;
+
+  transition:.3s;
 }
+
 .panel:target{
- opacity:1;
- pointer-events:auto;
+  opacity:1;
+  pointer-events:auto;
 }
+
+
+/* Google Calendar */
+
 .calendar{
- position:absolute;
- right:4%;
- top:6%;
- width:57%;
- height:88%;
- background:white;
- border:4px solid #ffc8d2;
- border-radius:15px;
- overflow:hidden;
- box-shadow:0 10px 35px #0006;
+  position:absolute;
+
+  right:4%;
+  top:6%;
+
+  width:57%;
+  height:88%;
+
+  overflow:hidden;
+
+  background:white;
+
+  border:4px solid #ffc8d2;
+  border-radius:15px;
+
+  box-shadow:0 10px 35px #0006;
 }
+
 .calendar iframe{
- width:100%;
- height:100%;
- border:0;
+  width:100%;
+  height:100%;
+
+  border:0;
 }
+
+
+/* 닫기 */
+
 .close{
- position:absolute;
- right:5%;
- top:7%;
- z-index:5;
- padding:6px 11px;
- border-radius:20px;
- background:#fff;
- color:#a65e69;
- text-decoration:none;
- font:bold 18px Arial;
- box-shadow:0 2px 8px #0003;
+  position:absolute;
+  z-index:5;
+
+  right:5%;
+  top:7%;
+
+  padding:6px 11px;
+
+  border-radius:20px;
+
+  background:#fff;
+  color:#a65e69;
+
+  text-decoration:none;
+
+  font:bold 18px Arial;
+
+  box-shadow:0 2px 8px #0003;
 }
+
 </style>
 </head>
 
@@ -98,23 +169,47 @@ html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#211a17}
 
 <div class="room">
 
-<a class="calbtn" href="#calendar">
- <span class="month">AUG</span>
- <span class="date">12</span>
- <span class="label">방송 일정</span>
-</a>
+  <!-- 클릭 전 달력 -->
+  <a
+    class="calbtn"
+    href="#calendar"
+  >
+    <span class="month">
+      AUG
+    </span>
 
-<div class="panel" id="calendar">
+    <span class="date">
+      12
+    </span>
 
- <div class="calendar">
-  <iframe
-   src="https://calendar.google.com/calendar/embed?src=kumi030a%40gmail.com&ctz=Asia%2FSeoul">
-  </iframe>
- </div>
+    <span class="label">
+      방송 일정
+    </span>
+  </a>
 
- <a class="close" href="#">×</a>
 
-</div>
+  <!-- 클릭 후 Google Calendar -->
+  <div
+    class="panel"
+    id="calendar"
+  >
+
+    <div class="calendar">
+
+      <iframe
+        src="https://calendar.google.com/calendar/embed?src=kumi030a%40gmail.com&ctz=Asia%2FSeoul">
+      </iframe>
+
+    </div>
+
+    <a
+      class="close"
+      href="#"
+    >
+      ×
+    </a>
+
+  </div>
 
 </div>
 
